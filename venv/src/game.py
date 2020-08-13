@@ -8,9 +8,11 @@ class Player:
 
     def attack(self, enemy):
         enemy.health_val = enemy.health_val - self.attack_val
+        print(enemy.name + "'s health is now " + str(enemy.health_val))
 
     def heal(self):
         self.health_val = self.health_val + player.heal_val
+        print(player.name + "'s health is now " + str(player.health_val))
 
 
 class Monster:
@@ -18,6 +20,10 @@ class Monster:
         self.name ="Max"
         self.attack_val = 12
         self.health_val = 100
+
+    def attack(self, enemy):
+        enemy.health_val = enemy.health_val - self.attack_val
+        print(self.name + " attacked! " + enemy.name + "'s health is now " + str(enemy.health_val))
 
 
 # Get User's name
@@ -42,7 +48,6 @@ while game_running:
     print("1 - Attack")
     print("2 - Heal")
     print("3 - Quit game")
-    print("---" * 7)
 
     player_choice = input("What do you choose?: ")
 
@@ -52,10 +57,20 @@ while game_running:
 
     if player_choice == '1':
         player.attack(monster)
-        print("Monster's health is now " + str(monster.health_val))
+        if monster.health_val <= 0:
+            print("You win!")
+            game_running = False
+        monster.attack(player)
+        if player.health_val <= 0:
+            print("You lost!")
+            game_running = False
+
 
     if player_choice == '2':
         player.heal()
+        if player.health_val >= 100:
+            player.health_val = 100
+        monster.attack(player)
 
 
 
