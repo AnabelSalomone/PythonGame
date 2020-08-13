@@ -1,5 +1,5 @@
 player = {
-    "name": "Player 1",
+    "name": "",
     "attack": 10,
     "heal": 16,
     "health": 100
@@ -22,6 +22,9 @@ while len(player["name"]) < 1:
 # Game
 game_running = True
 
+def player_attack():
+    monster["health"] = monster["health"] - player["attack"]
+
 while game_running:
     #Action selection
     print("Select an action")
@@ -35,5 +38,11 @@ while game_running:
     if player_choice == '3':
         print("Good bye!")
         game_running = False
+
+    if player_choice == '1':
+        player_attack()
+        print (monster["health"])
+
+
 
 
