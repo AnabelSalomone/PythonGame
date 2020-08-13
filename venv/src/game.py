@@ -11,17 +11,29 @@ monster = {
     "health": 100
 }
 
-#Get User's name
+# Get User's name
+print("---" * 7)
 player["name"] = input("What's your name: ")
 
 while len(player["name"]) < 1:
     player["name"] = input("Please write a name: ")
 
 
-#Action selection
-print("Select an action")
-print("1 - Attack")
-print("2 - Heal")
+# Game
+game_running = True
 
-player_choice = input("What do you choose?")
+while game_running:
+    #Action selection
+    print("Select an action")
+    print("1 - Attack")
+    print("2 - Heal")
+    print("3 - Quit game")
+    print("---" * 7)
+
+    player_choice = input("What do you choose?")
+
+    if player_choice == '3':
+        print("Good bye!")
+        game_running = False
+
 
