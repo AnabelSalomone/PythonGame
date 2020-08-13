@@ -1,29 +1,40 @@
-player = {
-    "name": "",
-    "attack": 10,
-    "heal": 16,
-    "health": 100
-}
+# Create characters
+class Player:
+    def __init__(self, name):
+        self.name = name
+        self.attack_val = 10
+        self.heal_val = 16
+        self.health_val = 100
 
-monster = {
-    "name": "Max",
-    "attack": 12,
-    "health": 100
-}
+    def attack(self, enemy):
+        enemy.health_val = enemy.health_val - self.attack_val
+
+    def heal(self):
+        self.health_val = self.health_val + player.heal_val
+
+
+class Monster:
+    def __init__(self):
+        self.name ="Max"
+        self.attack_val = 12
+        self.health_val = 100
+
 
 # Get User's name
 print("---" * 7)
-player["name"] = input("What's your name: ")
+player_name = input("What's your name: ")
 
-while len(player["name"]) < 1:
-    player["name"] = input("Please write a name: ")
+while len(player_name) < 1:
+    player_name = input("Please write a name: ")
+
+
+# Init characters
+player = Player(player_name)
+monster = Monster()
 
 
 # Game
 game_running = True
-
-def player_attack():
-    monster["health"] = monster["health"] - player["attack"]
 
 while game_running:
     #Action selection
@@ -33,15 +44,18 @@ while game_running:
     print("3 - Quit game")
     print("---" * 7)
 
-    player_choice = input("What do you choose?")
+    player_choice = input("What do you choose?: ")
 
     if player_choice == '3':
         print("Good bye!")
         game_running = False
 
     if player_choice == '1':
-        player_attack()
-        print (monster["health"])
+        player.attack(monster)
+        print("Monster's health is now " + str(monster.health_val))
+
+    if player_choice == '2':
+        player.heal()
 
 
 
